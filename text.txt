@@ -1,0 +1,636 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Celestial Wonder Experience</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600&display=swap');
+        
+        body {
+            font-family: 'Montserrat', sans-serif;
+            margin: 0;
+            padding: 0;
+            overflow-x: hidden;
+            color: white;
+            scroll-behavior: smooth;
+        }
+        
+        /* Enhanced Colorful Top Section */
+        .starry-background {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(to bottom, 
+                #1a0033 0%, 
+                #0a0a1a 30%, 
+                #000428 90%);
+            z-index: -1;
+            overflow: hidden;
+        }
+        
+        /* Colorful Nebula Effect in Top 90vh */
+        .colorful-nebula {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 90vh;
+            background: 
+                radial-gradient(circle at 20% 30%, rgba(138, 43, 226, 0.15) 0%, transparent 30%),
+                radial-gradient(circle at 70% 20%, rgba(33, 150, 243, 0.15) 0%, transparent 30%),
+                radial-gradient(circle at 50% 50%, rgba(255, 105, 180, 0.1) 0%, transparent 40%);
+            z-index: -1;
+        }
+        
+        .stars {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 200vh;
+            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100"><circle cx="10" cy="10" r="0.5" fill="white"/><circle cx="20" cy="30" r="0.3" fill="white"/><circle cx="30" cy="50" r="0.4" fill="white"/><circle cx="40" cy="70" r="0.2" fill="white"/><circle cx="50" cy="20" r="0.3" fill="white"/><circle cx="60" cy="40" r="0.5" fill="white"/><circle cx="70" cy="60" r="0.3" fill="white"/><circle cx="80" cy="80" r="0.4" fill="white"/><circle cx="90" cy="10" r="0.2" fill="white"/><circle cx="15" cy="25" r="0.3" fill="white"/><circle cx="25" cy="45" r="0.5" fill="white"/><circle cx="35" cy="65" r="0.2" fill="white"/><circle cx="45" cy="85" r="0.4" fill="white"/><circle cx="55" cy="15" r="0.3" fill="white"/><circle cx="65" cy="35" r="0.5" fill="white"/><circle cx="75" cy="55" r="0.2" fill="white"/><circle cx="85" cy="75" r="0.4" fill="white"/><circle cx="95" cy="5" r="0.3" fill="white"/></svg>');
+            background-size: 100px 100px;
+            animation: twinkle 5s infinite alternate;
+        }
+        
+        .stars::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(ellipse at center, rgba(103, 58, 183, 0.2) 0%, rgba(33, 150, 243, 0.1) 30%, rgba(0, 0, 0, 0) 70%);
+        }
+        
+        /* Enhanced Twinkling Stars */
+        .star {
+            position: absolute;
+            background-color: white;
+            border-radius: 50%;
+            animation: twinkle var(--duration) infinite alternate;
+            animation-delay: var(--delay);
+            box-shadow: 0 0 5px 1px rgba(255, 255, 255, 0.8);
+            transition: all 0.5s ease;
+        }
+        
+        .star.bright {
+            box-shadow: 0 0 10px 2px rgba(255, 255, 255, 0.9);
+            animation: twinkleBright var(--duration) infinite alternate;
+        }
+        
+        @keyframes twinkle {
+            0%, 100% { opacity: 0.3; }
+            50% { opacity: 1; }
+        }
+        
+        @keyframes twinkleBright {
+            0%, 100% { opacity: 0.5; transform: scale(1); }
+            50% { opacity: 1; transform: scale(1.2); }
+        }
+        
+        /* Enhanced Milky Way */
+        .milky-way {
+            position: absolute;
+            top: 10vh;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 150%;
+            height: 100vh;
+            background: 
+                linear-gradient(90deg, 
+                    transparent 0%, 
+                    rgba(138, 43, 226, 0.1) 20%, 
+                    rgba(33, 150, 243, 0.15) 50%, 
+                    rgba(138, 43, 226, 0.1) 80%, 
+                    transparent 100%);
+            opacity: 0.5;
+            filter: blur(10px);
+            z-index: -1;
+            animation: milkyWayGlow 15s infinite alternate;
+        }
+        
+        @keyframes milkyWayGlow {
+            0%, 100% { opacity: 0.4; }
+            50% { opacity: 0.7; }
+        }
+        
+        /* Glowing Moon */
+        .moon {
+            position: absolute;
+            top: 10vh;
+            right: 15%;
+            width: 80px;
+            height: 80px;
+            background: radial-gradient(circle at 30% 30%, #fff 0%, #f5f5dc 30%, #d4af37 100%);
+            border-radius: 50%;
+            box-shadow: 
+                0 0 40px 15px rgba(245, 245, 220, 0.4),
+                0 0 80px 30px rgba(212, 175, 55, 0.2);
+            z-index: -1;
+            animation: moonGlow 8s infinite alternate;
+        }
+        
+        .moon::before {
+            content: '';
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            width: 20px;
+            height: 20px;
+            background-color: rgba(0, 0, 0, 0.2);
+            border-radius: 50%;
+        }
+        
+        .moon::after {
+            content: '';
+            position: absolute;
+            top: 25px;
+            left: 30px;
+            width: 10px;
+            height: 10px;
+            background-color: rgba(0, 0, 0, 0.15);
+            border-radius: 50%;
+        }
+        
+        @keyframes moonGlow {
+            0%, 100% { box-shadow: 0 0 40px 15px rgba(245, 245, 220, 0.4); }
+            50% { box-shadow: 0 0 60px 25px rgba(245, 245, 220, 0.6); }
+        }
+        
+        /* Enhanced Shooting Stars with Colorful Trails */
+        .shooting-star {
+            position: absolute;
+            width: 4px;
+            height: 4px;
+            background: white;
+            border-radius: 50%;
+            box-shadow: 
+                0 0 10px 2px white,
+                0 0 20px 5px rgba(255, 255, 255, 0.7);
+            animation: shoot var(--duration) linear infinite;
+            opacity: 0;
+            transform-origin: left center;
+            z-index: 1;
+        }
+        
+        .shooting-star::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 150px;
+            height: 2px;
+            background: linear-gradient(90deg, 
+                rgba(255,255,255,1) 0%, 
+                rgba(255,105,180,0.8) 30%, 
+                rgba(138,43,226,0.6) 70%, 
+                rgba(33,150,243,0.4) 100%);
+            transform: translateX(-150px);
+            filter: blur(1px);
+        }
+        
+        .shooting-star::after {
+            content: '';
+            position: absolute;
+            top: -2px;
+            left: -2px;
+            width: 8px;
+            height: 8px;
+            background: white;
+            border-radius: 50%;
+            box-shadow: 0 0 15px 5px white;
+            opacity: 0;
+            animation: meteorHeadGlow var(--duration) linear infinite;
+        }
+        
+        @keyframes shoot {
+            0% {
+                transform: translateX(0) translateY(0) scale(0.5);
+                opacity: 0;
+            }
+            10% {
+                opacity: 1;
+            }
+            70% {
+                opacity: 1;
+            }
+            100% {
+                transform: translateX(1000px) translateY(300px) scale(1.5);
+                opacity: 0;
+            }
+        }
+        
+        @keyframes meteorHeadGlow {
+            0%, 100% { opacity: 0; }
+            10%, 70% { opacity: 1; }
+        }
+        
+        /* Content Sections */
+        .section {
+            position: relative;
+            width: 100%;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 2rem;
+            box-sizing: border-box;
+            background-color: rgba(10, 10, 26, 0.5);
+            backdrop-filter: blur(2px);
+        }
+        
+        /* Hero Section */
+        .hero-content {
+            max-width: 800px;
+            text-align: center;
+            z-index: 10;
+        }
+        
+        .hero-title {
+            font-size: 3rem;
+            font-weight: 300;
+            margin-bottom: 1rem;
+            text-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+            animation: glow 2s ease-in-out infinite alternate;
+        }
+        
+        @keyframes glow {
+            from {
+                text-shadow: 0 0 5px #fff, 0 0 10px #fff, 0 0 15px #e60073, 0 0 20px #e60073;
+            }
+            to {
+                text-shadow: 0 0 10px #fff, 0 0 20px #fff, 0 0 30px #ff4da6, 0 0 40px #ff4da6;
+            }
+        }
+        
+        .hero-subtitle {
+            font-size: 1.2rem;
+            max-width: 600px;
+            margin: 0 auto;
+            line-height: 1.6;
+            text-shadow: 0 0 5px rgba(255, 255, 255, 0.3);
+        }
+        
+        /* Bio Section */
+        .bio-container {
+            max-width: 800px;
+            text-align: center;
+            opacity: 0;
+            transform: translateY(50px);
+            transition: opacity 1s ease, transform 1s ease;
+        }
+        
+        .bio-container.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        .bio-title {
+            font-size: 2.5rem;
+            font-weight: 300;
+            margin-bottom: 2rem;
+            color: #ffffff;
+            text-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
+        }
+        
+        .bio-text {
+            font-size: 1.2rem;
+            line-height: 1.8;
+            margin-bottom: 2rem;
+            color: #e0e0e0;
+        }
+        
+        .team-members {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+        
+        .team-member {
+            width: 150px;
+            text-align: center;
+            background: rgba(58, 26, 90, 0.5);
+            padding: 1.5rem;
+            border-radius: 15px;
+            backdrop-filter: blur(5px);
+            border: 1px solid rgba(138, 43, 226, 0.3);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .team-member:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(138, 43, 226, 0.4);
+            border-color: rgba(138, 43, 226, 0.6);
+        }
+        
+        .member-avatar {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            background-color: #3a1a5a;
+            margin: 0 auto 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            color: white;
+            box-shadow: 0 0 20px rgba(138, 43, 226, 0.5);
+            transition: all 0.3s ease;
+        }
+        
+        .team-member:hover .member-avatar {
+            box-shadow: 0 0 30px rgba(138, 43, 226, 0.8);
+            transform: scale(1.05);
+        }
+        
+        .member-name {
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+        
+        .member-role {
+            font-size: 0.9rem;
+            color: #b0b0b0;
+        }
+        
+        /* Scroll Indicator */
+        .scroll-indicator {
+            position: absolute;
+            bottom: 50px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            z-index: 20;
+        }
+        
+        .scroll-indicator span {
+            display: block;
+            width: 20px;
+            height: 20px;
+            border-bottom: 2px solid white;
+            border-right: 2px solid white;
+            transform: rotate(45deg);
+            margin: -10px;
+            animation: scroll-down 2s infinite;
+        }
+        
+        .scroll-indicator span:nth-child(2) {
+            animation-delay: -0.2s;
+        }
+        
+        .scroll-indicator span:nth-child(3) {
+            animation-delay: -0.4s;
+        }
+        
+        @keyframes scroll-down {
+            0% {
+                opacity: 0;
+                transform: rotate(45deg) translate(-20px, -20px);
+            }
+            50% {
+                opacity: 1;
+            }
+            100% {
+                opacity: 0;
+                transform: rotate(45deg) translate(20px, 20px);
+            }
+        }
+        
+        /* Responsive Adjustments */
+        @media (max-width: 768px) {
+            .hero-title {
+                font-size: 2rem;
+            }
+            
+            .hero-subtitle {
+                font-size: 1rem;
+                padding: 0 20px;
+            }
+            
+            .bio-title {
+                font-size: 2rem;
+            }
+            
+            .bio-text {
+                font-size: 1rem;
+            }
+            
+            .team-members {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .moon {
+                width: 60px;
+                height: 60px;
+                right: 10%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Enhanced Starry Background -->
+    <div class="starry-background">
+        <div class="colorful-nebula"></div>
+        <div class="stars"></div>
+        <div class="milky-way"></div>
+        <div class="moon"></div>
+        
+        <!-- Enhanced Shooting Stars -->
+        <div class="shooting-star" style="top: 15%; left: 15%; --duration: 4s;"></div>
+        <div class="shooting-star" style="top: 25%; left: 65%; --duration: 6s;"></div>
+        <div class="shooting-star" style="top: 40%; left: 30%; --duration: 5s;"></div>
+        <div class="shooting-star" style="top: 60%; left: 10%; --duration: 7s;"></div>
+        <div class="shooting-star" style="top: 20%; left: 50%; --duration: 3.5s;"></div>
+    </div>
+    
+    <!-- Hero Section -->
+    <section class="section">
+        <div class="hero-content">
+            <h1 class="hero-title">Celestial Wonder</h1>
+            <p class="hero-subtitle">Experience the magic of the cosmos with our enhanced starry night</p>
+        </div>
+        
+        <!-- Scroll Indicator -->
+        <div class="scroll-indicator">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+    </section>
+    
+    <!-- Bio Section -->
+    <section class="section">
+        <div class="bio-container">
+            <h2 class="bio-title">Meet Our Team</h2>
+            <p class="bio-text">
+                We are a group of passionate stargazers and digital creators who believe in the magic of the night sky. 
+                Our mission is to bring the wonder of the cosmos to everyone, anywhere, through immersive digital experiences.
+            </p>
+            <p class="bio-text">
+                Each member of our team brings unique skills and perspectives, united by our shared love for astronomy 
+                and the stories written in the stars.
+            </p>
+            
+            <div class="team-members">
+                <div class="team-member">
+                    <div class="member-avatar">A</div>
+                    <h3 class="member-name">Alex Morgan</h3>
+                    <p class="member-role">Astronomer</p>
+                </div>
+                <div class="team-member">
+                    <div class="member-avatar">S</div>
+                    <h3 class="member-name">Sarah Chen</h3>
+                    <p class="member-role">Designer</p>
+                </div>
+                <div class="team-member">
+                    <div class="member-avatar">J</div>
+                    <h3 class="member-name">Jamal Wright</h3>
+                    <p class="member-role">Developer</p>
+                </div>
+                <div class="team-member">
+                    <div class="member-avatar">M</div>
+                    <h3 class="member-name">Maria Garcia</h3>
+                    <p class="member-role">Storyteller</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Additional Section -->
+    <section class="section">
+        <div class="bio-container">
+            <h2 class="bio-title">Our Mission</h2>
+            <p class="bio-text">
+                To inspire wonder and curiosity about the universe through beautiful digital experiences that make astronomy accessible to everyone.
+            </p>
+            <div class="mt-8 p-6 bg-purple-900 bg-opacity-30 rounded-xl backdrop-blur-md border border-purple-700 hover:border-purple-500 transition-all duration-300">
+                <h3 class="text-xl font-light mb-4">Join Our Journey</h3>
+                <p class="mb-4">Subscribe to our newsletter for cosmic updates</p>
+                <div class="flex justify-center">
+                    <input type="email" placeholder="Your email" class="px-4 py-2 rounded-l-lg bg-gray-800 bg-opacity-70 text-white focus:outline-none focus:ring-2 focus:ring-purple-500 w-64">
+                    <button class="px-4 py-2 bg-purple-600 hover:bg-purple-700 rounded-r-lg transition-colors">Subscribe</button>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <script>
+        // Create enhanced twinkling stars effect
+        document.addEventListener('DOMContentLoaded', function() {
+            const starryBackground = document.querySelector('.starry-background');
+            
+            // Add more stars with random twinkling
+            for (let i = 0; i < 500; i++) {
+                const star = document.createElement('div');
+                star.className = 'star';
+                
+                // Random size between 1px and 3px
+                const size = Math.random() * 2 + 1;
+                star.style.width = `${size}px`;
+                star.style.height = `${size}px`;
+                
+                // Random position
+                star.style.top = `${Math.random() * 100}%`;
+                star.style.left = `${Math.random() * 100}%`;
+                
+                // Random animation properties
+                const duration = Math.random() * 5 + 3;
+                const delay = Math.random() * 5;
+                star.style.setProperty('--duration', `${duration}s`);
+                star.style.setProperty('--delay', `${delay}s`);
+                
+                // Make some stars brighter
+                if (Math.random() > 0.7) {
+                    star.classList.add('bright');
+                }
+                
+                starryBackground.appendChild(star);
+            }
+            
+            // Create enhanced shooting stars with colorful trails
+            function createShootingStar() {
+                const shootingStar = document.createElement('div');
+                shootingStar.className = 'shooting-star';
+                
+                // Random position from top (mostly in top 90vh)
+                const startTop = Math.random() * 90;
+                const startLeft = Math.random() * 100;
+                
+                // Random duration between 2s and 6s
+                const duration = Math.random() * 4 + 2;
+                
+                shootingStar.style.top = `${startTop}%`;
+                shootingStar.style.left = `${startLeft}%`;
+                shootingStar.style.setProperty('--duration', `${duration}s`);
+                
+                // Random color variation for some shooting stars
+                if (Math.random() > 0.7) {
+                    shootingStar.style.boxShadow = `0 0 10px 2px white, 0 0 20px 5px rgba(${
+                        Math.floor(Math.random() * 155) + 100
+                    }, ${
+                        Math.floor(Math.random() * 155) + 100
+                    }, 255, 0.7)`;
+                }
+                
+                starryBackground.appendChild(shootingStar);
+                
+                // Remove after animation completes
+                setTimeout(() => {
+                    shootingStar.remove();
+                }, duration * 1000);
+            }
+            
+            // Create shooting stars periodically
+            setInterval(createShootingStar, 1500);
+            
+            // Parallax effect for stars on scroll
+            window.addEventListener('scroll', function() {
+                const yPos = window.scrollY;
+                const stars = document.querySelector('.stars');
+                stars.style.transform = `translateY(${-yPos * 0.2}px)`;
+                
+                // Show sections when scrolled to them
+                document.querySelectorAll('.bio-container').forEach(container => {
+                    const rect = container.getBoundingClientRect();
+                    if (rect.top < window.innerHeight * 0.8) {
+                        container.classList.add('visible');
+                    }
+                });
+            });
+            
+            // Random twinkle effect for stars
+            setInterval(() => {
+                const stars = document.querySelectorAll('.star');
+                stars.forEach(star => {
+                    if (Math.random() > 0.9) {
+                        star.style.opacity = Math.random() * 0.7 + 0.3;
+                        if (star.classList.contains('bright')) {
+                            star.style.transform = `scale(${Math.random() * 0.5 + 0.8})`;
+                        }
+                    }
+                });
+            }, 300);
+            
+            // Milky Way animation
+            const milkyWay = document.querySelector('.milky-way');
+            setInterval(() => {
+                milkyWay.style.transform = `translateX(-50%) rotate(${Math.sin(Date.now() / 5000) * 2}deg)`;
+            }, 50);
+            
+            // Trigger initial check in case page loads with scroll position
+            window.dispatchEvent(new Event('scroll'));
+        });
+    </script>
+</body>
+</html>
